@@ -4,11 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.luizafmartinez.composedio.ui.theme.ComposeDIOTheme
 
@@ -30,6 +33,26 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun MainScreen() {
+//    Text(text = "Texto com Compose")
+//    Text(text = "Outro texto")
+    Button(onClick = { /*TODO*/ }) {
+        Icon(
+            painter = painterResource(id = R.drawable.star_24),
+            contentDescription = null
+        )
+        Text(text= "Confirmar")
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MainScreenPreview() {
+    MainScreen()
+}
+
+
+@Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
@@ -37,10 +60,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     ComposeDIOTheme {
-        Greeting("Android")
+        Greeting("Compose")
     }
 }
