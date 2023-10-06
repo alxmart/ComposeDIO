@@ -18,6 +18,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Modifier.Companion.foldIn
@@ -40,8 +44,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+
                     //Greeting("Android")
                     MainScreen()
+
                 }
             }
         }
@@ -50,32 +56,44 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen() {
-
-    DogCard(dog = Dog("Luna", "Chow chow"))
-
-    /*Column(modifier = Modifier.background(androidx.compose.ui.graphics.Color.Red)) {
-        Text(
-            text = "Hello World",
-            maxLines = 3,
-            fontSize = 14.sp
-        )
-        Text(
-            text = "Outro texto"
-        )
-    }*/
-
-  /*  Button(
-        onClick = { TODO },
-        colors = ButtonDefaults.buttonColors(androidx.compose.ui.graphics.Color.Red)
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.star_24),
-            contentDescription = null
-        )
-        Text(text= "Confirmar",
-             color = androidx.compose.ui.graphics.Color.White )
-    }*/
+    //DogCard(dog = Dog("Luna", "Chow chow"))
+    var clicks by remember {  mutableStateOf(0) }
+        ClickCounter(clicks = clicks) {
+            clicks++
+    }
 }
+
+@Composable
+fun ClickCounter(clicks: Int, onClick: () -> Unit) {
+    Button(onClick = onClick) {
+        Text("I've been clicked $clicks times")
+    }
+}
+
+
+/*Column(modifier = Modifier.background(androidx.compose.ui.graphics.Color.Red)) {
+    Text(
+        text = "Hello World",
+        maxLines = 3,
+        fontSize = 14.sp
+    )
+    Text(
+        text = "Outro texto"
+    )
+}*/
+
+/*  Button(
+      onClick = { TODO },
+      colors = ButtonDefaults.buttonColors(androidx.compose.ui.graphics.Color.Red)
+  ) {
+      Icon(
+          painter = painterResource(id = R.drawable.star_24),
+          contentDescription = null
+      )
+      Text(text= "Confirmar",
+           color = androidx.compose.ui.graphics.Color.White )
+  }*/
+
 
 data class Dog(
     val name: String,
@@ -84,17 +102,19 @@ data class Dog(
 
 @Composable
 fun DogCard(dog: Dog) {
-    Row(verticalAlignment = Alignment.CenterVertically,
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
-        ) {
+    ) {
         Image(
             painter = painterResource(id = R.drawable.star_24),
             contentDescription = null,
-            modifier = Modifier.size(72.dp)
+            modifier = Modifier
+                .size(72.dp)
                 .clip(CircleShape)
         )
-        Column{
+        Column {
             Text(text = dog.name)
             Text(text = dog.breed)
         }
@@ -102,7 +122,6 @@ fun DogCard(dog: Dog) {
     }
 
 }
-
 
 
 @Preview(showBackground = true)
