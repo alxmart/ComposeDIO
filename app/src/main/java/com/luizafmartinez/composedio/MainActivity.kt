@@ -9,12 +9,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -54,19 +57,50 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
     //DogCard(dog = Dog("Luna", "Chow chow"))
     var clicks by remember {  mutableStateOf(0) }
+
+    Column (modifier = Modifier.fillMaxSize()) {
+
         ClickCounter(clicks = clicks) {
             clicks++
+        }
+        HelloContent()
+    }
+
+}
+
+@ExperimentalMaterial3Api
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HelloContent() {
+    Column(modifier = Modifier.padding(16.dp)) {
+        var name by remember { mutableStateOf("") }
+        if (name.isNotEmpty()) {
+            Text(
+                text = "Hello, $name!",
+                modifier = Modifier.padding(bottom = 8.dp),
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("Name") }
+        )
     }
 }
 
 @Composable
 fun ClickCounter(clicks: Int, onClick: () -> Unit) {
-    Button(onClick = onClick) {
-        Text("I've been clicked $clicks times")
+
+    Column {
+        Button(onClick = onClick) {
+            Text("I've been clicked $clicks times")
+        }
     }
 }
 
