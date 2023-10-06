@@ -60,7 +60,6 @@ class ListActivity : ComponentActivity() {
                 ItemList(name = item.name)
             }
         }
-
     }
 
     @Composable
@@ -82,5 +81,4 @@ class ListActivity : ComponentActivity() {
              ItemList(name = it.name)
          }
      }*/
-
 }
