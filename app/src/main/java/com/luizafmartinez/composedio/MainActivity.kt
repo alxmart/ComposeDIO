@@ -53,7 +53,6 @@ fun MainScreen() {
 
     DogCard(dog = Dog("Luna", "Chow chow"))
 
-
     /*Column(modifier = Modifier.background(androidx.compose.ui.graphics.Color.Red)) {
         Text(
             text = "Hello World",
